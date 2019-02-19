@@ -1,0 +1,5 @@
+#ifndef PBDHAIRSIM_H
+#define PBDHAIRSIM_H
+#include <kernel.h>
+
+#endif // PBDHAIRSIM_H
