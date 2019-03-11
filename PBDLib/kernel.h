@@ -1,13 +1,13 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include "pbdhair_global.h"
+#include "pbdlib_global.h"
 
-class PBDHAIRSHARED_EXPORT PBDHair
+class PBDLIBSHARED_EXPORT PBDobj
 {
 
 public:
-    PBDHair(uint _numStrands);
+    PBDobj(uint _numStrands);
 
     uint m_numStrands;
 };

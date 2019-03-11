@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <PBDHairSim>
+#include <PBDLib>
 
 int main(int argc, char **argv)
 {
@@ -17,8 +17,8 @@ TEST(gtest, fail)
     ASSERT_EQ(0,0);
 }
 
-TEST(PBDHair, default_ctr)
+TEST(PBDLib, default_ctr)
 {
-    PBDHair hair(10);
+    PBDobj hair(10);
     EXPECT_EQ(10,hair.m_numStrands);
 }

@@ -6,10 +6,10 @@
 
 QT       += widgets opengl
 
-TARGET = PBDHair
+TARGET = PBDLib
 TEMPLATE = lib
 
-DEFINES += PBDHAIR_LIBRARY
+DEFINES += PBDLIB_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -27,8 +27,8 @@ SOURCES += \
 
 HEADERS += \
         kernel.h \
-        pbdhair_global.h \  
-    PBDHairSim
+    PBDLib \
+    pbdlib_global.h
 
 unix {
     target.path = /usr/lib
