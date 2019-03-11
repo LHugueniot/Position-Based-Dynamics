@@ -1,4 +1,4 @@
 TEMPLATE=subdirs
-SUBDIRS+=PBDHair/PBDHair.pro \
+SUBDIRS+=PBDLib/PBDLib.pro \
          OGL/OGL.pro \
          TestHair/Tests.pro
