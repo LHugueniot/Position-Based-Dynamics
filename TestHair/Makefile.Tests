@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I../PBDHair -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -I../PBDLib -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++
 QMAKE         = /opt/Qt5.11.1/5.11.1/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -35,10 +35,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Tests1.0.0
-DISTDIR = /home/s4906706/Documents/PP/PPproj/HairSim/TestHair/.tmp/Tests1.0.0
+DISTDIR = /home/s4906706/Documents/PP/PPproj/LuHuPBDLib/TestHair/.tmp/Tests1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt5.11.1/5.11.1/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/usr/local/lib -lgtest -lgtest_main -L/home/s4906706/Documents/PP/PPproj/HairSim/TestHair/../PBDHair -lPBDHair -L/opt/Qt5.11.1/5.11.1/gcc_64/lib -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/local/lib -lgtest -lgtest_main -L/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/TestHair/../PBDLib -lPBDLib -L/opt/Qt5.11.1/5.11.1/gcc_64/lib -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -697,9 +697,9 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: main.cpp ../PBDHair/PBDHairSim \
-		../PBDHair/kernel.h \
-		../PBDHair/pbdhair_global.h \
+main.o: main.cpp ../PBDLib/PBDLib \
+		../PBDLib/pbdobject.h \
+		../PBDLib/pbdlib_global.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig.h \

@@ -3,11 +3,11 @@
 
 #include "pbdlib_global.h"
 
-class PBDLIBSHARED_EXPORT PBDobj
+class PBDLIBSHARED_EXPORT PBDobject
 {
 
 public:
-    PBDobj(uint _numStrands);
+    PBDobject(uint _numStrands);
 
     uint m_numStrands;
 };

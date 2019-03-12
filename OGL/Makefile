@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = OGL1.0.0
-DISTDIR = /home/s4906706/Documents/PP/PPproj/HairSim/OGL/.tmp/OGL1.0.0
+DISTDIR = /home/s4906706/Documents/PP/PPproj/LuHuPBDLib/OGL/.tmp/OGL1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt5.11.1/5.11.1/gcc_64/lib
 LIBS          = $(SUBLIBS) -lglut -lGLU -L/opt/Qt5.11.1/5.11.1/gcc_64/lib -lQt5OpenGL -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -839,7 +839,7 @@ moc_mainwindow.cpp: /opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
 		mainwindow.h \
 		moc_predefs.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc
-	/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/s4906706/Documents/PP/PPproj/HairSim/OGL -I/usr/local/bin -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtOpenGL -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -I/public/devel/2018/include -I/opt/rh/devtoolset-7/root/usr/include/c++/7 -I/opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux -I/opt/rh/devtoolset-7/root/usr/include/c++/7/backward -I/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/opt/rh/devtoolset-7/root/usr/include -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/OGL -I/usr/local/bin -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtOpenGL -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -I/public/devel/2018/include -I/opt/rh/devtoolset-7/root/usr/include/c++/7 -I/opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux -I/opt/rh/devtoolset-7/root/usr/include/c++/7/backward -I/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/opt/rh/devtoolset-7/root/usr/include -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_glwidget.cpp: /opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qobject.h \
@@ -964,7 +964,7 @@ moc_glwidget.cpp: /opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/QObject \
 		glwidget.h \
 		moc_predefs.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc
-	/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/s4906706/Documents/PP/PPproj/HairSim/OGL -I/usr/local/bin -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtOpenGL -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -I/public/devel/2018/include -I/opt/rh/devtoolset-7/root/usr/include/c++/7 -I/opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux -I/opt/rh/devtoolset-7/root/usr/include/c++/7/backward -I/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/opt/rh/devtoolset-7/root/usr/include -I/usr/include glwidget.h -o moc_glwidget.cpp
+	/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/OGL -I/usr/local/bin -I/opt/Qt5.11.1/5.11.1/gcc_64/include -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtOpenGL -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui -I/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore -I. -I/public/devel/2018/include -I/opt/rh/devtoolset-7/root/usr/include/c++/7 -I/opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux -I/opt/rh/devtoolset-7/root/usr/include/c++/7/backward -I/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/opt/rh/devtoolset-7/root/usr/include -I/usr/include glwidget.h -o moc_glwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
