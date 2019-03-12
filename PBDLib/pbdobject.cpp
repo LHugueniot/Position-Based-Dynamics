@@ -29,7 +29,22 @@ bool PBDobject::Initialize(std::string _model, glm::vec3 _originalPos)
         std::cout<<aiGetErrorString()<<"\n";
         return false;
     }
-    scene->mMeshes[0]->mVertices;
+    if(scene->HasMeshes())
+    {
+        for(int i=0; i<scene->mNumMeshes; i++)
+        {
+            for(int j=0; j<scene->mMeshes[i]->mNumVertices; j++)
+            {
+                m_pArray.push_back(
+                glm::vec3(scene->mMeshes[i]->mVertices[j].x,
+                scene->mMeshes[i]->mVertices[j].y,
+                scene->mMeshes[i]->mVertices[j].z));
+            }
+        }
+    }
+    scene->mMeshes;
+    scene->mMeshes[1]->mVertices;
+
     return true;
 }
 

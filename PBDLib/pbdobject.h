@@ -5,7 +5,7 @@
 #include "point.h"
 #include <iostream>
 #include <string>
-#include <array>
+#include <vector>
 
 #include <glm/glm.hpp>
 
@@ -21,9 +21,10 @@ public:
     PBDobject();
     ~PBDobject(){}
     bool Initialize(std::string _model, glm::vec3 _originalPos);
+
     std::string m_modelName;
-    uint m_numStrands;
     glm::vec3 m_originalPosition;
+    std::vector<glm::vec3> m_pArray;
 };
 
 }
