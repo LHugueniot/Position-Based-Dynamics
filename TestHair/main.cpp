@@ -36,10 +36,23 @@ TEST(PBDobject, initialisetrue)
     LuHu::PBDobject hair;
 
     bool testval=hair.Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",glm::vec3(0,0,0));
-    ASSERT_EQ(testval, false);
+    ASSERT_EQ(testval, true);
 }
 
 TEST(Point, defaultctr)
 {
-    point p(glm::vec3(0,0,0));
+    point p(glm::vec3(0,0,0), glm::vec3(0,0,0), 1.0f);
+    ASSERT_EQ(p.m_pPos,glm::vec3(0,0,0));
+    ASSERT_EQ(p.m_pVel,glm::vec3(0,0,0));
+    ASSERT_EQ(p.m_pWeight, 1.0f);
 }
+
+TEST(PBDobject, storePoints)
+{
+
+}
+
+
+
+
+
