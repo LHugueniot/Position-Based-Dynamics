@@ -6,10 +6,10 @@
 
 QT       += widgets opengl
 
-TARGET = PBDLib
+TARGET = $$(PWD)/build/PBDLib
 TEMPLATE = lib
 
-DEFINES += PBDLIB_LIBRARY
+DEFINES += PBDLIB_LIBRARY MODEL_DIR='$${PWD}'
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -22,22 +22,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        kernel.cpp \
-    pbdobject.cpp \
-    point.cpp
+#MOC_DIR +=
+OBJECTS_DIR+= $$(PWD)/obj/
 
-HEADERS += \
-        kernel.h \
-    PBDLib \
-    pbdlib_global.h \
-    pbdobject.h \
-    PBDLib \
-    point.h
+INCLUDEPATH+=$$(PWD)/src/ \
+            $$(PWD)/include/
+
+SOURCES +=  $$(PWD)/src/kernel.cpp \
+            $$(PWD)/src/pbdobject.cpp \
+            $$(PWD)/src/point.cpp
+
+HEADERS +=  $$(PWD)/include/kernel.h \
+            $$(PWD)/include/PBDLib \
+            $$(PWD)/include/pbdlib_global.h \
+            $$(PWD)/include/pbdobject.h \
+            $$(PWD)/include/PBDLib \
+            $$(PWD)/include/point.h
 
 LIBS+=-lassimp
 
 unix {
-    target.path = /usr/lib
+    #target.path = $$PWD/include
     INSTALLS += target
 }
