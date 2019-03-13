@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+namespace LuHu {
+
 class point
 {
 public:
@@ -13,4 +15,5 @@ public:
     float m_pWeight;
 };
 
+}
 #endif // POINT_H

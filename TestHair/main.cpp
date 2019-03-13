@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include <PBDLib>
 
 int main(int argc, char **argv)
@@ -12,10 +13,6 @@ TEST(gtest, succes)
     ASSERT_EQ(0,0);
 }
 
-TEST(gtest, fail)
-{
-    ASSERT_EQ(0,0);
-}
 
 TEST(PBDobject, initialisefalse)
 {
@@ -35,13 +32,14 @@ TEST(PBDobject, initialisetrue)
 {
     LuHu::PBDobject hair;
 
-    bool testval=hair.Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",glm::vec3(0,0,0));
+    //bool testval=hair.Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",glm::vec3(0,0,0));
+    bool testval=hair.Initialize("/home/datlucien/Documents/PP/PPproj/PBDLib/models/deCube.obj",glm::vec3(0,0,0));
     ASSERT_EQ(testval, true);
 }
 
 TEST(Point, defaultctr)
 {
-    point p(glm::vec3(0,0,0), glm::vec3(0,0,0), 1.0f);
+    LuHu::point p(glm::vec3(0,0,0), glm::vec3(0,0,0), 1.0f);
     ASSERT_EQ(p.m_pPos,glm::vec3(0,0,0));
     ASSERT_EQ(p.m_pVel,glm::vec3(0,0,0));
     ASSERT_EQ(p.m_pWeight, 1.0f);
@@ -51,7 +49,6 @@ TEST(PBDobject, storePoints)
 {
 
 }
-
 
 
 

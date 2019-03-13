@@ -35,15 +35,18 @@ bool PBDobject::Initialize(std::string _model, glm::vec3 _originalPos)
         {
             for(int j=0; j<scene->mMeshes[i]->mNumVertices; j++)
             {
+                auto a=glm::vec3(scene->mMeshes[i]->mVertices[j].x,
+                                 scene->mMeshes[i]->mVertices[j].y,
+                                 scene->mMeshes[i]->mVertices[j].z);
+                //scene->mMeshes[i]->
                 m_pArray.push_back(
-                glm::vec3(scene->mMeshes[i]->mVertices[j].x,
-                scene->mMeshes[i]->mVertices[j].y,
-                scene->mMeshes[i]->mVertices[j].z));
+                a);
+                std::cout<<a.x<<" "<<a.y<<" "<<a.z<<"\n";
             }
         }
     }
-    scene->mMeshes;
-    scene->mMeshes[1]->mVertices;
+//    scene->mMeshes;
+//    scene->mMeshes[1]->mVertices;
 
     return true;
 }
