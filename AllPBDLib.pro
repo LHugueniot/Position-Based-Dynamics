@@ -1,4 +1,5 @@
-TEMPLATE=subdirs
-SUBDIRS+=PBDLib/PBDLib.pro \
-         OGL/OGL.pro \
-         TestHair/Tests.pro
+TEMPLATE= subdirs
+
+SUBDIRS+= $$(PWD)/PBDLib/PBDLib.pro \
+          $$(PWD)/TestHair/Tests.pro \
+          $$(PWD)/OGL/OGL.pro

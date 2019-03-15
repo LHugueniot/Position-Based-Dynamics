@@ -10,6 +10,7 @@
 #include <QTimer>
 #include <glm/glm.hpp>
 
+#include <PBDLib>
 
 class GLWidget : public QGLWidget
 {
@@ -28,6 +29,9 @@ private:
 protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
+
+    const aiScene* scene=LuHu::getModel("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj");
+    LuHu::posVector ConnectedPoints= LuHu::getConnectedPoints(scene,0);
 };
 
 #endif // GLWIDGET_H

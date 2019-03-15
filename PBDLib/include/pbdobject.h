@@ -2,7 +2,7 @@
 #define PBDOBJECT_H
 
 #include "pbdlib_global.h"
-#include "point.h"
+#include "constraint.h"
 #include "kernel.h"
 
 
@@ -22,7 +22,6 @@ public:
     PBDobject();
     ~PBDobject(){}
     bool Initialize(std::string _model, glm::vec3 _originalPos);
-//    glm::vec3
 
     std::string m_modelName;
     glm::vec3 m_originalPosition;
