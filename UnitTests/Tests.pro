@@ -4,8 +4,11 @@ CONFIG+=c++11
 
 DEFINES+= CURRENT_DIR=$$PWD
 
-SOURCES += \
-    main.cpp
+SOURCES += src/main.cpp
+
+OBJECTS_DIR+=obj/
+
+TARGET= build/Tests
 
 INCLUDEPATH+= $$PWD/../PBDLib/include
 

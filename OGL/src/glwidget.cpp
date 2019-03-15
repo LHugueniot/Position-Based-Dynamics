@@ -19,6 +19,7 @@ void GLWidget::initializeGL()
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
+    //ConnectedPoints=LuHu::removeDuplicates( ConnectedPoints);
 }
 
 void GLWidget::paintGL()
@@ -29,27 +30,33 @@ void GLWidget::paintGL()
 
     glColor3f(1, 0, 0.5);
 
-//    glBindBuffer(GL_ARRAY_BUFFER, buf1);
-//    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+////    glBindBuffer(GL_ARRAY_BUFFER, buf1);
+////    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+////    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    glPushMatrix();
-    //auto p=Cloth.OtherObjs[0]->m_pos;
-    //glTranslated(p.x,p.y,p.z);
-    //glutSolidSphere(Cloth.OtherObjs[0]->m_radius,20,20);
-    glPopMatrix();
+//    glPushMatrix();
+//    //auto p=Cloth.OtherObjs[0]->m_pos;
+//    //glTranslated(p.x,p.y,p.z);
+//    //glutSolidSphere(Cloth.OtherObjs[0]->m_radius,20,20);
+//    glPopMatrix();
 
     glBegin(GL_LINES);
 //    for(uint i=0; i<Cloth.m_ConPtrs.size(); i++)
 //    {
-//        auto pA=Cloth.m_ConPtrs[i]->m_pA->m_ppos;
-//        auto pB=Cloth.m_ConPtrs[i]->m_pB->m_ppos;
+
 
 //        glColor3f(1, 0, 0);
 //        glVertex3f(pA.x, pA.y, pA.z);
 //        glColor3f(0, 1, 0);
 //        glVertex3f(pB.x, pB.y, pB.z);
 //    }
+    //ConnectedPoints=LuHu::removeDuplicates( ConnectedPoints);
+    std::cout<<ConnectedPoints.size()<<"\n";
+    for(uint i=0; i<ConnectedPoints.size(); i+=2)
+    {
+        glVertex3f(ConnectedPoints[i].x, ConnectedPoints[i].y, ConnectedPoints[i].z);
+        glVertex3f(ConnectedPoints[i+1].x, ConnectedPoints[i+1].y, ConnectedPoints[i+1].z);
+    }
     glEnd();
     //gluLookAt(CamPos[0],CamPos[1],CamPos[2], LookAt[0], LookAt[1], LookAt[2], 0, 1, 0);
 

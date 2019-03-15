@@ -21,7 +21,7 @@ bool PBDobject::Initialize(std::string _model, glm::vec3 _originalPos)
         return false;
     }
 
-    m_facePoints=storePoints(scene);
+    m_facePoints=storePoints(scene,0);
     return true;
 }
 

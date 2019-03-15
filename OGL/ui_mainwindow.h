@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.0
+** Created by: Qt User Interface Compiler version 5.11.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -12,8 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -74,9 +72,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        pushbutton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
-        menuClothSim->setTitle(QApplication::translate("MainWindow", "ClothSim", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        pushbutton->setText(QApplication::translate("MainWindow", "&Quit", nullptr));
+        menuClothSim->setTitle(QApplication::translate("MainWindow", "ClothSim", nullptr));
     } // retranslateUi
 
 };
