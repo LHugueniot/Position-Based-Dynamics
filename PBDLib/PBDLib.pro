@@ -26,19 +26,21 @@ DEFINES += QT_DEPRECATED_WARNINGS #'CURRENT_DIR=$$(PWD)'
 
 INCLUDEPATH+=/home/datlucien/assimp/include include
 
-HEADERS +=  $$(PWD)/include/kernel.h \
-            $$(PWD)/include/PBDLib \
-            $$(PWD)/include/pbdlib_global.h \
-            $$(PWD)/include/pbdobject.h \
-            $$(PWD)/include/PBDLib \
-            $$(PWD)/include/point.h \
-    include/constraint.h \
-    include/vec3duo.h
+HEADERS +=  include/kernel.h \
+            include/PBDLib \
+            include/pbdlib_global.h \
+            include/pbdobject.h \
+            include/PBDLib \
+            include/point.h \
+            include/constraint.h \
+            include/indexDuo.h \
+            include/solver.h
 
-SOURCES +=  $$(PWD)/src/kernel.cpp \
-            $$(PWD)/src/pbdobject.cpp \
-            $$(PWD)/src/point.cpp \
-    $$(PWD)/src/constraint.cpp
+SOURCES +=  src/kernel.cpp \
+            src/pbdobject.cpp \
+            src/point.cpp \
+            src/constraint.cpp \
+            src/solver.cpp
 
 OBJECTS_DIR+=   $$(PWD)/obj/
 

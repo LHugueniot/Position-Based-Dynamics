@@ -967,7 +967,7 @@ moc_glwidget.cpp: /opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/QObject \
 		../PBDLib/include/constraint.h \
 		../PBDLib/include/point.h \
 		../PBDLib/include/kernel.h \
-		../PBDLib/include/vec3duo.h \
+		../PBDLib/include/indexDuo.h \
 		include/glwidget.h \
 		moc_predefs.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/bin/moc
@@ -1109,7 +1109,7 @@ ui_mainwindow.h: moc/mainwindow.ui \
 		../PBDLib/include/constraint.h \
 		../PBDLib/include/point.h \
 		../PBDLib/include/kernel.h \
-		../PBDLib/include/vec3duo.h
+		../PBDLib/include/indexDuo.h
 	/opt/Qt5.11.1/5.11.1/gcc_64/bin/uic moc/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -1271,7 +1271,7 @@ main.o: src/main.cpp include/mainwindow.h \
 		../PBDLib/include/constraint.h \
 		../PBDLib/include/point.h \
 		../PBDLib/include/kernel.h \
-		../PBDLib/include/vec3duo.h \
+		../PBDLib/include/indexDuo.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1541,7 +1541,7 @@ glwidget.o: src/glwidget.cpp include/glwidget.h \
 		../PBDLib/include/constraint.h \
 		../PBDLib/include/point.h \
 		../PBDLib/include/kernel.h \
-		../PBDLib/include/vec3duo.h \
+		../PBDLib/include/indexDuo.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o glwidget.o src/glwidget.cpp
 

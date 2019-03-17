@@ -19,7 +19,8 @@ void GLWidget::initializeGL()
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
-    //ConnectedPoints=LuHu::removeDuplicates( ConnectedPoints);
+    m_testObj.Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",glm::vec3(0));
+
 }
 
 void GLWidget::paintGL()
@@ -30,9 +31,9 @@ void GLWidget::paintGL()
 
     glColor3f(1, 0, 0.5);
 
-////    glBindBuffer(GL_ARRAY_BUFFER, buf1);
-////    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-////    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ARRAY_BUFFER, buf1);
+//    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 //    glPushMatrix();
 //    //auto p=Cloth.OtherObjs[0]->m_pos;
@@ -40,25 +41,35 @@ void GLWidget::paintGL()
 //    //glutSolidSphere(Cloth.OtherObjs[0]->m_radius,20,20);
 //    glPopMatrix();
 
+
+
+    glRotatef(angle,0,1,0);
+
+
     glBegin(GL_LINES);
-//    for(uint i=0; i<Cloth.m_ConPtrs.size(); i++)
-//    {
 
-
-//        glColor3f(1, 0, 0);
-//        glVertex3f(pA.x, pA.y, pA.z);
-//        glColor3f(0, 1, 0);
-//        glVertex3f(pB.x, pB.y, pB.z);
-//    }
-    //ConnectedPoints=LuHu::removeDuplicates( ConnectedPoints);
-    std::cout<<ConnectedPoints.size()<<"\n";
-    for(uint i=0; i<ConnectedPoints.size(); i+=2)
+    for(uint i=0; i<m_testObj.getConstraints().size(); i++)
     {
-        glVertex3f(ConnectedPoints[i].x, ConnectedPoints[i].y, ConnectedPoints[i].z);
-        glVertex3f(ConnectedPoints[i+1].x, ConnectedPoints[i+1].y, ConnectedPoints[i+1].z);
+        auto p1 =m_testObj.getConstraints()[i].get()->getPoint(0).get()->getP();
+        auto p2 =m_testObj.getConstraints()[i].get()->getPoint(1).get()->getP();
+        LuHu::printVec3(p1);
+        LuHu::printVec3(p2);
+        std::cout<<"\n";
+
+        glColor3f(1, 0, 0);
+        glVertex3f(p1.x, p1.y, p1.z);
+        glColor3f(0, 1, 0);
+        glVertex3f(p2.x, p2.y, p2.z);
+
+
+        //glm::vec3 p1 = m_testObj.getConstraints()[i].get()->getPoint(0);
     }
+    std::cout<<"\n\n";
     glEnd();
+
+        glLoadIdentity();
     //gluLookAt(CamPos[0],CamPos[1],CamPos[2], LookAt[0], LookAt[1], LookAt[2], 0, 1, 0);
+        angle++;
 
 }
 

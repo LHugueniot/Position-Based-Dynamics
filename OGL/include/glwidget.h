@@ -23,6 +23,7 @@ public:
     int time;
     std::vector<float> CamPos;
     std::vector<float> LookAt;
+    float angle=0;
 private:
     QTimer timer;
 
@@ -30,8 +31,7 @@ protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
 
-    const aiScene* scene=LuHu::getModel("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj");
-    LuHu::posVector ConnectedPoints= LuHu::getConnectedPoints(scene,0);
+    LuHu::PBDobject m_testObj;
 };
 
 #endif // GLWIDGET_H

@@ -13,17 +13,24 @@ public:
 
     glm::vec3 getP() const;
     glm::vec3 getV() const;
-    float getW()     const;
+    glm::vec3 getTmpPos() const;
+    float getM() const;
+    float getIM() const;
 
     void setP(glm::vec3 _pPos);
     void setV(glm::vec3 _pVel);
-    void setW(float _pWeight );
+    void setTmp(glm::vec3 _tmpPos);
+    void setM(float _pMass );
+    void setIM(float _pinvMass);
 
     bool operator==(const point &p1) const;
 private:
     glm::vec3 m_pPos;
     glm::vec3 m_pVel;
-    float m_pWeight;
+    glm::vec3 tmp_pos;
+    float m_pMass;
+    float m_pinvMass;
+
 };
 
 }

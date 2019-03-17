@@ -724,7 +724,8 @@ obj/main.o: ../UnitTests/src/main.cpp ../PBDLib/include/PBDLib \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qversiontagging.h \
 		../PBDLib/include/constraint.h \
 		../PBDLib/include/point.h \
-		../PBDLib/include/kernel.h
+		../PBDLib/include/kernel.h \
+		../PBDLib/include/indexDuo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o ../UnitTests/src/main.cpp
 
 ####### Install
