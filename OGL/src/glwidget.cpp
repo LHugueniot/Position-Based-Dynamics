@@ -22,6 +22,7 @@ void GLWidget::initializeGL()
 
     m_solver= new LuHu::solver(1.0f, glm::vec3(0,-0.1,0));
     addPlain();
+    //addCone();
 
 }
 

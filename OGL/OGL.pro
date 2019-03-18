@@ -35,7 +35,7 @@ HEADERS += $$files($$PWD/include/*.h)
 
 MOC_DIR +=moc
 
-OBJECTS_DIR+=obj
+OBJECTS_DIR+= $$files($$PWD/obj)
 
 
 FORMS += ui/mainwindow.ui
