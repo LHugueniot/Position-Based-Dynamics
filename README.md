@@ -32,4 +32,4 @@ To use demo:
 	
 Class Hierarchy is based on this UML diagram:
 
-	![LuHuPBDUMLDiagram](https://user-images.githubusercontent.com/22621061/54531231-b13f5180-497c-11e9-95e9-2467184c3e19.png)
+![LuHuPBDUMLDiagram](https://user-images.githubusercontent.com/22621061/54531231-b13f5180-497c-11e9-95e9-2467184c3e19.png)
