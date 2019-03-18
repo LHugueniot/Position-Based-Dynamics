@@ -24,6 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS #'CURRENT_DIR=$$(PWD)'
 
 #MOC_DIR +=
 
+OTHER_FILES+=models/*.obj
+
 INCLUDEPATH+=/home/datlucien/assimp/include include
 
 HEADERS +=  include/kernel.h \

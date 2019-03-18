@@ -28,6 +28,7 @@ public:
 
     void addPlain();
     void addCone();
+    void addcube();
     bool drawPBDObjects(paintType _type);
     void drawGrid(uint size);
 

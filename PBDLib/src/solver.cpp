@@ -80,9 +80,9 @@ std::vector<std::shared_ptr<LuHu::PBDobject>> solver::getObjects() const
 void solver::RunSolver(float dt)
 {
     float inv_dt = 1/dt;
-    for(std::shared_ptr<PBDobject> pObject :m_PBDObjects)
+    for(std::shared_ptr<PBDobject> & pObject :m_PBDObjects)
     {
-        auto objPoints= pObject.get()->getPoints();
+        auto objPoints= pObject->getPoints();
         auto objConstraints = pObject.get()->getConstraints();
 
         for(uint i=0; i<objPoints.size(); i++)
@@ -99,7 +99,7 @@ void solver::RunSolver(float dt)
         {
             for (uint j=0; j<objConstraints.size(); j++)
             {
-                objConstraints[j].get()->timeStep();
+                objConstraints[j]->timeStep();
             }
         }
 

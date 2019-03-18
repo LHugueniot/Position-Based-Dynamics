@@ -31,11 +31,11 @@ public:
 
     /// @brief returns pointers to the points stored in PBDObject
 
-    std::vector<std::shared_ptr<point>> getPoints() const;
+    const std::vector<std::shared_ptr<point> > &getPoints() const;
 
     /// @brief returns pointers to the constraints stored in PBDObject
 
-    std::vector<std::shared_ptr<constraint>> getConstraints() const;
+    const std::vector<std::shared_ptr<constraint> > &getConstraints() const;
 
     /// @brief adds a point to PBDObject
 
@@ -47,7 +47,7 @@ public:
 
     /// @brief returns faces based on points
 
-    std::vector<std::shared_ptr<point>> getFacesPoints() const;
+    const std::vector<std::shared_ptr<point> > &getFacesPoints() const;
 
     std::string getName() const
     {

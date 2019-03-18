@@ -21,9 +21,25 @@ void GLWidget::initializeGL()
     glEnable(GL_COLOR_MATERIAL);
 
     m_solver= new LuHu::solver(1.0f, glm::vec3(0,-0.1,0));
-    addPlain();
+//    /addPlain();
     //addCone();
-
+//    auto m_testObj = std::shared_ptr<LuHu::PBDobject>(new LuHu::PBDobject);
+//    auto a=m_testObj->Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/manPerson.obj",0,glm::vec3(0,0,0));
+//    if(a)
+//    {
+//        std::cout<<"working!";
+//        m_solver->addPBDobject(m_testObj);
+//        m_testObj->getPoints()[0]->setIM(0);
+//        m_testObj->getPoints()[20]->setIM(0);
+//    }
+//    else
+//    {
+//        std::cout<<"its not working";
+//    }
+    auto m_testObj = std::shared_ptr<LuHu::PBDobject>(new LuHu::PBDobject);
+    auto a=m_testObj->Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/manPerson.obj",2,glm::vec3(0,5,0));
+    m_solver->addPBDobject(m_testObj);
+    m_testObj->getPoints()[0]->setIM(0);
 }
 
 void GLWidget::paintGL()
@@ -41,7 +57,7 @@ void GLWidget::paintGL()
     }
 
     glRotatef(angle,0,1,0);
-    drawPBDObjects(TRIANGLES);
+    drawPBDObjects(LINES);
 
     glLoadIdentity();
     //angle++;
@@ -116,6 +132,14 @@ void GLWidget::addPlain()
     {
         std::cout<<"its not working";
     }
+}
+
+void GLWidget::addcube()
+{
+    auto m_testObj = std::shared_ptr<LuHu::PBDobject>(new LuHu::PBDobject);
+    auto a=m_testObj->Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",0,glm::vec3(0,5,0));
+    m_solver->addPBDobject(m_testObj);
+    m_testObj->getPoints()[0]->setIM(0);
 }
 
 void GLWidget::addCone()
