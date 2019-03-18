@@ -21,7 +21,6 @@ bool PBDobject::Initialize(std::string _model,uint _meshIndex, glm::vec3 _origin
         return false;
     }
 
-<<<<<<< HEAD
     auto allpoints = storePoints(scene, _meshIndex);
     auto edges = getEdges(scene, _meshIndex, allpoints);
     auto faceIndices=removeDuplicates(allpoints);
@@ -34,9 +33,6 @@ bool PBDobject::Initialize(std::string _model,uint _meshIndex, glm::vec3 _origin
         auto pos = p.get()->getP();
         p.get()->setP(pos+m_originalPosition );
     }
-=======
-    m_facePoints=storePoints(scene,0);
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
     return true;
 }
 

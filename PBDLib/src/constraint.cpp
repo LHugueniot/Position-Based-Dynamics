@@ -1,5 +1,4 @@
 #include "constraint.h"
-<<<<<<< HEAD
 #include "kernel.h"
 
 namespace LuHu{
@@ -107,34 +106,10 @@ void distanceConstraint::setRestLength(float _newRestLength)
 
 collisionConstraint::collisionConstraint(std::shared_ptr<point> _p1) :
     m_p1(_p1)
-=======
-
-namespace LuHu{
-
-//-----------------------------------------------------------------Distance Constraint---------------------------------------------------
-
-
-distanceConstraint::distanceConstraint(std::shared_ptr<point> _p1,
-                                       std::shared_ptr<point> _p2):
-                                        m_p1(_p1), m_p2(_p2){}
-
-distanceConstraint::distanceConstraint(point & _p1, point & _p2):
-                                        m_p1(std::make_shared<point>(_p1)),
-                                        m_p2(std::make_shared<point>(_p2)){}
-
-void distanceConstraint::timeStep(int dt)
-{
-
-}
-//-----------------------------------------------------------------Collision Constraint--------------------------------------------------
-
-collisionConstraint::collisionConstraint()
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 {
 
 }
 
-<<<<<<< HEAD
 void collisionConstraint::timeStep()
 {
 
@@ -155,12 +130,6 @@ void collisionConstraint::setPoint(std::shared_ptr<point> _p, uint index)
         std::cout<<"bendingConstraint error, index too big, must be equal to 0";
     }
 }
-=======
-void collisionConstraint::timeStep(int dt)
-{
-
-}
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 
 //-----------------------------------------------------------------Bending Constraint----------------------------------------------------
 
@@ -169,29 +138,18 @@ void collisionConstraint::timeStep(int dt)
 bendingConstraint::bendingConstraint(std::shared_ptr<point> _p1,
                                      std::shared_ptr<point> _p2,
                                      std::shared_ptr<point> _p3):
-<<<<<<< HEAD
     m_p1(_p1), m_p2(_p2), m_p3(_p3){}
 
 bendingConstraint::bendingConstraint(point & _p1, point & _p2, point & _p3):
-=======
-                                      m_p1(_p1), m_p2(_p2), m_p3(_p3){}
-
-bendingConstraint::bendingConstraint(point _p1, point _p2, point _p3):
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
     m_p1(std::make_shared<point>(_p1)),
     m_p2(std::make_shared<point>(_p2)),
     m_p3(std::make_shared<point>(_p3)){}
 
-<<<<<<< HEAD
 void bendingConstraint::timeStep()
-=======
-void bendingConstraint::timeStep(int dt)
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 {
 
 }
 
-<<<<<<< HEAD
 std::shared_ptr<point> bendingConstraint::getPoint(uint index) const
 {
     if(index==0)
@@ -243,7 +201,3 @@ void bendingConstraint::setAngle(float _angle)
 }
 
 }
-=======
-}
-
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad

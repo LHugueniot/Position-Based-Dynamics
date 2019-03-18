@@ -10,7 +10,6 @@ class constraint
 {
 public:
 
-<<<<<<< HEAD
     constraint();
     ~constraint();
     virtual void timeStep();
@@ -20,17 +19,10 @@ public:
 
 //-----------------------------------------------------------------Distance Constraint---------------------------------------------------
 
-=======
-    constraint(){}
-    virtual void timeStep(int dt){}
-};
-
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 class distanceConstraint : public constraint
 {
 public:
 
-<<<<<<< HEAD
     /// @brief Constructor.
     /// @param _p1 is the first point type shared pointer.
     /// @param _p2 is the second point type shared pointer.
@@ -83,24 +75,11 @@ private:
 
 //-----------------------------------------------------------------Collision Constraint--------------------------------------------------
 
-=======
-    distanceConstraint(std::shared_ptr<point> _p1, std::shared_ptr<point> _p2);
-
-    distanceConstraint(point &_p1, point &_p2);
-
-    void timeStep(int dt);
-
-    std::shared_ptr<point> m_p1;
-    std::shared_ptr<point> m_p2;
-};
-
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 
 class collisionConstraint : public constraint
 {
 
 public:
-<<<<<<< HEAD
     /// @brief Constructor.
     /// @param _p1 is the first point type shared pointer.
 
@@ -127,22 +106,12 @@ private:
 };
 
 //-----------------------------------------------------------------Bending Constraint----------------------------------------------------
-=======
-
-    collisionConstraint();
-
-
-    void timeStep(int dt);
-};
-
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 
 class bendingConstraint : public constraint
 {
 
 public:
 
-<<<<<<< HEAD
     /// @brief Constructor.
     /// @param _p1 is the first point type shared pointer.
     /// @param _p2 is the second point type shared pointer.
@@ -194,16 +163,6 @@ private:
     /// @param m_angle angle between the segments at rest
 
     float  m_angle;
-=======
-    bendingConstraint(std::shared_ptr<point> _p1, std::shared_ptr<point> _p2, std::shared_ptr<point> _p3);
-    bendingConstraint(point _p1, point _p2, point _p3);
-
-    void timeStep(int dt);
-
-    std::shared_ptr<point> m_p1;
-    std::shared_ptr<point> m_p2;
-    std::shared_ptr<point> m_p3;
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 };
 
 }

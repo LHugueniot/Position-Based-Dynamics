@@ -53,7 +53,6 @@ OBJECTS_DIR   = obj/
 SOURCES       = src/kernel.cpp \
 		src/pbdobject.cpp \
 		src/point.cpp \
-<<<<<<< HEAD
 		src/constraint.cpp \
 		src/solver.cpp 
 OBJECTS       = obj/kernel.o \
@@ -61,13 +60,6 @@ OBJECTS       = obj/kernel.o \
 		obj/point.o \
 		obj/constraint.o \
 		obj/solver.o
-=======
-		src/constraint.cpp 
-OBJECTS       = obj/kernel.o \
-		obj/pbdobject.o \
-		obj/point.o \
-		obj/constraint.o
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 DIST          = /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -259,27 +251,16 @@ DIST          = /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/lex.prf \
 		PBDLib.pro include/kernel.h \
 		include/PBDLib \
-<<<<<<< HEAD
-=======
-		include/pbdlib_global.h \
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 		include/pbdobject.h \
 		include/PBDLib \
 		include/point.h \
 		include/constraint.h \
-<<<<<<< HEAD
 		include/indexDuo.h \
 		include/solver.h src/kernel.cpp \
 		src/pbdobject.cpp \
 		src/point.cpp \
 		src/constraint.cpp \
 		src/solver.cpp
-=======
-		include/vec3duo.h src/kernel.cpp \
-		src/pbdobject.cpp \
-		src/point.cpp \
-		src/constraint.cpp
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 QMAKE_TARGET  = PBDLib
 DESTDIR       = build/
 TARGET        = libPBDLib.so.1.0.0
@@ -721,13 +702,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-<<<<<<< HEAD
 	$(COPY_FILE) --parents include/kernel.h include/PBDLib include/pbdobject.h include/PBDLib include/point.h include/constraint.h include/indexDuo.h include/solver.h $(DISTDIR)/
 	$(COPY_FILE) --parents src/kernel.cpp src/pbdobject.cpp src/point.cpp src/constraint.cpp src/solver.cpp $(DISTDIR)/
-=======
-	$(COPY_FILE) --parents include/kernel.h include/PBDLib include/pbdlib_global.h include/pbdobject.h include/PBDLib include/point.h include/constraint.h include/vec3duo.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/kernel.cpp src/pbdobject.cpp src/point.cpp src/constraint.cpp $(DISTDIR)/
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 
 
 clean: compiler_clean 
@@ -778,7 +754,6 @@ compiler_clean: compiler_moc_predefs_clean
 ####### Compile
 
 obj/kernel.o: src/kernel.cpp include/kernel.h \
-<<<<<<< HEAD
 		include/point.h \
 		include/indexDuo.h \
 		include/constraint.h
@@ -789,68 +764,12 @@ obj/pbdobject.o: src/pbdobject.cpp include/pbdobject.h \
 		include/point.h \
 		include/indexDuo.h \
 		include/constraint.h
-=======
-		include/pbdlib_global.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qglobal.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qtcore-config.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qsystemdetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qprocessordetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qcompilerdetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qtypeinfo.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qsysinfo.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qlogging.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qflags.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qbasicatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qgenericatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_msvc.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qglobalstatic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qmutex.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qnumeric.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qversiontagging.h \
-		include/point.h \
-		include/vec3duo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/kernel.o src/kernel.cpp
-
-obj/pbdobject.o: src/pbdobject.cpp include/pbdobject.h \
-		include/pbdlib_global.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qglobal.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qconfig.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qtcore-config.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qsystemdetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qprocessordetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qcompilerdetection.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qtypeinfo.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qsysinfo.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qlogging.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qflags.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qbasicatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qgenericatomic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qatomic_msvc.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qglobalstatic.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qmutex.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qnumeric.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qversiontagging.h \
-		include/constraint.h \
-		include/point.h \
-		include/kernel.h \
-		include/vec3duo.h
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/pbdobject.o src/pbdobject.cpp
 
 obj/point.o: src/point.cpp include/point.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/point.o src/point.cpp
 
 obj/constraint.o: src/constraint.cpp include/constraint.h \
-<<<<<<< HEAD
 		include/point.h \
 		include/kernel.h \
 		include/indexDuo.h
@@ -864,11 +783,6 @@ obj/solver.o: src/solver.cpp include/solver.h \
 		include/constraint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/solver.o src/solver.cpp
 
-=======
-		include/point.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/constraint.o src/constraint.cpp
-
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 ####### Install
 
 install:  FORCE

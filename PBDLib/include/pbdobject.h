@@ -1,11 +1,6 @@
 #ifndef PBDOBJECT_H
 #define PBDOBJECT_H
 
-<<<<<<< HEAD
-=======
-#include "pbdlib_global.h"
-#include "constraint.h"
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 #include "kernel.h"
 
 
@@ -29,7 +24,6 @@ public:
     /// @brief destructor
 
     ~PBDobject(){}
-<<<<<<< HEAD
 
     /// @brief initialiser, takes in the model path and name, the mesh index and generates points and constraints based on _originalPos
 
@@ -68,9 +62,6 @@ public:
 private:
 
     /// @param string storing model name
-=======
-    bool Initialize(std::string _model, glm::vec3 _originalPos);
->>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 
     std::string m_modelName;
 
