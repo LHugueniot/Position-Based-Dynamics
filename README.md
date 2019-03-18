@@ -30,5 +30,4 @@ To use library in code:
 To use demo:
 	in the initialize function it is possible to switch between a cone model and a plain model which have been pre setup
 
-
-
+![Alt text](raw=true "LuHuPBDUMLDiagram.png")
