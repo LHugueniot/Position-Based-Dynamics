@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS #'CURRENT_DIR=$$(PWD)'
 #MOC_DIR +=
 
 INCLUDEPATH+=/home/datlucien/assimp/include include
+<<<<<<< HEAD
 
 HEADERS +=  include/kernel.h \
             include/PBDLib \
@@ -43,6 +44,25 @@ SOURCES +=  src/kernel.cpp \
 
 OBJECTS_DIR+= obj/
 
+=======
+
+HEADERS +=  $$(PWD)/include/kernel.h \
+            $$(PWD)/include/PBDLib \
+            $$(PWD)/include/pbdlib_global.h \
+            $$(PWD)/include/pbdobject.h \
+            $$(PWD)/include/PBDLib \
+            $$(PWD)/include/point.h \
+    include/constraint.h \
+    include/vec3duo.h
+
+SOURCES +=  $$(PWD)/src/kernel.cpp \
+            $$(PWD)/src/pbdobject.cpp \
+            $$(PWD)/src/point.cpp \
+    $$(PWD)/src/constraint.cpp
+
+OBJECTS_DIR+=   $$(PWD)/obj/
+
+>>>>>>> 6e9392ae1e5b6d2bf5c7fbb41f5ea908e8b4dbad
 LIBS+= -lassimp
 
 unix {
