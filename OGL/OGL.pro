@@ -25,27 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-LIBS += -L$$(PWD)/../PBDLib/build -lPBDLib -lglut -lGL -lGLU
+LIBS +=  -L../PBDLib/build -lPBDLib -lglut -lGL -lGLU
 
-INCLUDEPATH+= /usr/local/bin/ $$(PWD)/include $$PWD/../PBDLib/include
+INCLUDEPATH+= /usr/local/bin/ include ../PBDLib/include
 
-SOURCES +=  $$(PWD)/src/main.cpp \
-            $$(PWD)/src/mainwindow.cpp \
-            $$(PWD)/src/glwidget.cpp \
-            $$(PWD)/src/trackballcam.cpp
+SOURCES +=  $$files($$PWD/src/*.cpp)
 
-HEADERS +=  $$(PWD)/include/mainwindow.h \
-            $$(PWD)/include/glwidget.h \
-            $$(PWD)/include/trackballcam.h
+HEADERS += $$files($$PWD/include/*.h)
 
-FORMS +=    $$(PWD)/moc/mainwindow.ui
+MOC_DIR +=moc
 
-QMAKE_RPATHDIR+= $$PWD/../PBDLib
-#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ClothLib/release/ -lClothSimLib
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ClothLib/debug/ -lClothSimLib
-#else:unix: LIBS += -L$$OUT_PWD/../ClothLib/ -lClothSimLib
+OBJECTS_DIR+=obj
 
-#INCLUDEPATH += $$PWD/../ClothLib
-#DEPENDPATH += $$PWD/../ClothLib
+
+FORMS += ui/mainwindow.ui
+
+#QMAKE_RPATHDIR+= ../PBDLib
 
 QMAKE_CXXFLAGS+=-O3

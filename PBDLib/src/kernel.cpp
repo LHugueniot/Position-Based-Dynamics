@@ -1,6 +1,4 @@
 #include "kernel.h"
-#include <unordered_set>
-#include <set>
 
 namespace LuHu {
 
@@ -26,8 +24,6 @@ posVector storePoints(const aiScene* scene,uint meshIndex)
         {
 
             temp.push_back(aiToGLM(scene->mMeshes[meshIndex]->mVertices[j]));
-            //                                     scene->mMeshes[meshIndex]->mVertices[j].y,
-            //                                     scene->mMeshes[meshIndex]->mVertices[j].z));
         }
     }
     return temp;
@@ -86,17 +82,17 @@ posVector removeDuplicates(posVector _pVec)
     while(!sorted)
     {
         uint count=newVec.size()-1;
-        for (uint i=0;i<tempVec.size()-1; i++)
+        for (auto p : tempVec)
         {
 
-            if(compare(tempVec[i], newVec)==true)
+            if(compare(p, newVec)==true)
             {
 
                 continue;
             }
             else
             {
-                newVec.push_back(tempVec[i]);
+                newVec.push_back(p);
                 count--;
             }
         }
@@ -128,17 +124,19 @@ bool compare1(indexDuo _p1, indexDuo _p2)
     }
 }
 
-std::vector<indexDuo> getEdges(const aiScene* scene,uint meshIndex)
+std::vector<std::shared_ptr<point>> getFaces(const aiScene* scene, uint meshIndex,
+                                             std::vector<std::shared_ptr<point>> &pointVector,
+                                             posVector defaultIndexing)
 {
-    std::vector<indexDuo> _temp;
-    std::vector<indexDuo> f_temp;
+    std::vector<indexTrio> _temp;
+    std::vector<std::shared_ptr<point>> faceVector;
     if(scene && scene->HasMeshes())
     {
         auto mesh=scene->mMeshes[meshIndex];
         auto& faces=mesh->mFaces;
         auto numFace=mesh->mNumFaces;
 
-        auto defaultIndexing=storePoints(scene,0);
+//        auto defaultIndexing=storePoints(scene,0);
         posVector uniqueVertices=removeDuplicates(defaultIndexing);
         std::vector<uint> filter;
 
@@ -153,34 +151,67 @@ std::vector<indexDuo> getEdges(const aiScene* scene,uint meshIndex)
             }
         }
 
-        for(uint i=0;i<numFace; i++)
+        for(uint i=0;i<(numFace-1); i++)
         {
+            auto faceIndices=faces[i].mIndices;
+            if(faces[i].mNumIndices==3 && i!=numFace-1)
+            {
+                //std::cout<<"tri\n";
+                _temp.push_back(indexTrio(filter[faceIndices[0]], filter[faceIndices[1]] , filter[faceIndices[2]]));
+            }
+
+        }
+
+        for(auto  p: _temp)
+        {
+            faceVector.push_back(pointVector[p.p1]);
+            faceVector.push_back(pointVector[p.p2]);
+            faceVector.push_back(pointVector[p.p3]);
+        }
+    }
+    return faceVector;
+}
+
+std::vector<indexDuo> getEdges(const aiScene* scene, uint meshIndex,
+                               posVector defaultIndexing)
+{
+    std::vector<indexDuo> _temp;
+    std::vector<indexDuo> f_temp;
+    if(scene && scene->HasMeshes())
+    {
+        auto mesh=scene->mMeshes[meshIndex];
+        auto& faces=mesh->mFaces;
+        auto numFace=mesh->mNumFaces;
+
+        std::cout<<numFace;
+
+//        auto defaultIndexing=storePoints(scene,0);
+        posVector uniqueVertices=removeDuplicates(defaultIndexing);
+        std::vector<uint> filter;
+
+        for(uint i=0; i<defaultIndexing.size(); i++)
+        {
+            for(uint j=0; j<uniqueVertices.size(); j++)
+            {
+                if(defaultIndexing[i] == uniqueVertices[j])
+                {
+                    filter.push_back(j);
+                }
+            }
+        }
+
+        for(uint i=0;i<(numFace); i++)
+        {
+            auto faceIndices=faces[i].mIndices;
             if(faces[i].mNumIndices==3)
             {
                 //std::cout<<"tri\n";
-                auto faceIndices=faces[i].mIndices;
                 _temp.push_back(indexDuo(filter[faceIndices[0]], filter[faceIndices[1]]));
                 _temp.push_back(indexDuo(filter[faceIndices[1]], filter[faceIndices[2]]));
                 _temp.push_back(indexDuo(filter[faceIndices[2]], filter[faceIndices[0]]));
-                //                std::cout<<filter[faceIndices[0]]<<" "<<filter[faceIndices[1]]<<"\n"<<
-                //                        filter[faceIndices[1]]<<" "<<filter[faceIndices[2]]<<"\n"<<
-                //                        filter[faceIndices[2]]<<" "<<filter[faceIndices[0]]<<"\n\n";
 
             }
-            else if(faces[i].mNumIndices==4)
-            {
-                std::cout<<"quad\n";
-                auto faceIndices=faces[i].mIndices;
-                _temp.push_back(indexDuo(faceIndices[0],faceIndices[1]));
-                _temp.push_back(indexDuo(faceIndices[1],faceIndices[2]));
-                _temp.push_back(indexDuo(faceIndices[2],faceIndices[3]));
-                _temp.push_back(indexDuo(faceIndices[3],faceIndices[0]));
-            }
         }
-//        for(auto t : _temp)
-//        {
-//            std::cout<<t.p.first<<" "<<t.p.second<<"\n";
-//        }
 
         std::vector<std::vector<int>> test;
         for(auto t : _temp)
@@ -193,17 +224,13 @@ std::vector<indexDuo> getEdges(const aiScene* scene,uint meshIndex)
 
         std::sort(test.begin(), test.end());
         test.erase(std::unique(test.begin(), test.end()), test.end());
-        //std::cout<<test.size();
 
         for(auto p : test)
         {
             f_temp.push_back(indexDuo(p[0], p[1]));
-            std::cout<<p[0]<<" "<<p[1]<<"\n";
         }
-        std::cout<<f_temp.size()<<"\n";
         return f_temp;
     }
-
 }
 
 std::vector<std::shared_ptr<constraint>> createDistanceConstraints(std::vector<indexDuo> edges,
@@ -213,25 +240,16 @@ std::vector<std::shared_ptr<constraint>> createDistanceConstraints(std::vector<i
 
     posVector uniqueVertices=removeDuplicates(vertices);
     std::vector<std::shared_ptr<point>> temp;           //to be a duplicate free vertex of point pointers
-    std::vector<std::shared_ptr<point>> verticeIndex;   //one to one vertices indexing
+
     std::vector<std::shared_ptr<constraint>> conIndex;
+
     for(auto p : uniqueVertices)
     {
         std::shared_ptr<point> a(new point(p,glm::vec3(0), 1.0f));
         temp.push_back(a);
     }
-    //pointVector->operator =(temp);
+
     pointVector=temp;
-    for(auto p : vertices)
-    {
-        for(uint i=0; i<temp.size();i++)
-        {
-            if(p==temp[i].get()->getP())
-            {
-                verticeIndex.push_back(temp[i]);
-            }
-        }
-    }
 
     for(uint j=0; j<edges.size(); j++)
     {
@@ -243,9 +261,8 @@ std::vector<std::shared_ptr<constraint>> createDistanceConstraints(std::vector<i
         std::shared_ptr<constraint> b(new distanceConstraint(p1, p2));
         conIndex.push_back(b);
     }
-    std::cout<<conIndex.size();
-    return conIndex;
 
+    return conIndex;
 }
 
 }

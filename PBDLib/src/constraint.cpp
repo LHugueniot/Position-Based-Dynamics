@@ -1,9 +1,22 @@
 #include "constraint.h"
+#include "kernel.h"
 
 namespace LuHu{
 
-//-----------------------------------------------------------------Distance Constraint---------------------------------------------------
+//-----------------------------------------------------------------Base Constraint class-------------------------------------------------
 
+
+constraint::constraint(){}
+
+constraint::~constraint(){}
+
+void constraint::timeStep(){}
+
+std::shared_ptr<point> constraint::getPoint(uint index) const{}
+
+void constraint::setPoint(std::shared_ptr<point> _p, uint index){}
+
+//-----------------------------------------------------------------Distance Constraint---------------------------------------------------
 
 distanceConstraint::distanceConstraint(std::shared_ptr<point> _p1,
                                        std::shared_ptr<point> _p2):
@@ -20,23 +33,47 @@ distanceConstraint::distanceConstraint(point & _p1, point & _p2):
     m_restLength=glm::length(m_p1->getP() - m_p2->getP());
 }
 
-void distanceConstraint::timeStep(uint dt)
+void distanceConstraint::timeStep()
 {
     glm::vec3 dir = m_p1->getTmpPos() - m_p2->getTmpPos();
+
     float len = glm::length(dir);
     float inv_mass=m_p1->getIM() + m_p2->getIM();
 
-    //std::cout<<len<<"\n";
+    m_p1->setTmp(
+                (m_p1->getTmpPos()-
+                 (m_p1->getIM()/inv_mass)*
+                 (len - m_restLength)*
+                 (dir/len)
+                 )
+                );
 
-    m_p1->setTmp(((m_p1->getIM()/inv_mass)*
-                     (len - m_restLength)*
-                     (dir/len))-
-                 m_p1->getTmpPos());
 
-    m_p2->setTmp(((m_p2->getIM()/inv_mass)*
+    m_p2->setTmp(
+                (
+                    m_p2->getTmpPos()+
+                    (m_p2->getIM()/inv_mass)*
                     (len - m_restLength)*
-                    (dir/len))+
-                 m_p2->getTmpPos());
+                    (dir/len)
+                    )
+                );
+}
+std::shared_ptr<point> distanceConstraint::getPoint(uint index) const
+
+{
+    if(index==0)
+    {
+        return m_p1;
+    }
+    else if(index==1)
+    {
+        return m_p2;
+    }
+    else
+    {
+        return NULL;
+    }
+
 }
 
 float distanceConstraint::getRestLength() const
@@ -44,27 +81,55 @@ float distanceConstraint::getRestLength() const
     return m_restLength;
 }
 
-std::shared_ptr<point> distanceConstraint::getPoint1() const
+void distanceConstraint::setPoint(std::shared_ptr<point> _p, uint index)
 {
-    return m_p1;
+    if(index==0)
+    {
+        m_p1=_p;
+    }
+    else if(index==1)
+    {
+        m_p2=_p;
+    }
+    else
+    {
+        std::cout<<"distanceConstraint error, index too big, must be smaller than 2";
+    }
 }
 
-std::shared_ptr<point> distanceConstraint::getPoint2() const
+void distanceConstraint::setRestLength(float _newRestLength)
 {
-    return m_p2;
+    m_restLength=_newRestLength;
 }
+
 //-----------------------------------------------------------------Collision Constraint--------------------------------------------------
 
-collisionConstraint::collisionConstraint()
+collisionConstraint::collisionConstraint(std::shared_ptr<point> _p1) :
+    m_p1(_p1)
 {
 
 }
 
-void collisionConstraint::timeStep(uint dt)
+void collisionConstraint::timeStep()
+{
+
+}
+std::shared_ptr<point> collisionConstraint::getPoint(uint index) const
 {
 
 }
 
+void collisionConstraint::setPoint(std::shared_ptr<point> _p, uint index)
+{
+    if(index==0)
+    {
+        m_p1=_p;
+    }
+    else
+    {
+        std::cout<<"bendingConstraint error, index too big, must be equal to 0";
+    }
+}
 
 //-----------------------------------------------------------------Bending Constraint----------------------------------------------------
 
@@ -80,26 +145,49 @@ bendingConstraint::bendingConstraint(point & _p1, point & _p2, point & _p3):
     m_p2(std::make_shared<point>(_p2)),
     m_p3(std::make_shared<point>(_p3)){}
 
-void bendingConstraint::timeStep(uint dt)
+void bendingConstraint::timeStep()
 {
 
 }
 
-
-
-std::shared_ptr<point> bendingConstraint::getPoint1() const
+std::shared_ptr<point> bendingConstraint::getPoint(uint index) const
 {
-    return m_p1;
+    if(index==0)
+    {
+        return m_p1;
+    }
+    else if(index==1)
+    {
+        return m_p2;
+    }
+    else if(index==2)
+    {
+        return m_p3;
+    }
+    else
+    {
+        std::cout<<"bendingConstraint error, index too big, must be smaller than 3";
+    }
 }
 
-std::shared_ptr<point> bendingConstraint::getPoint2() const
+void bendingConstraint::setPoint(std::shared_ptr<point> _p, uint index)
 {
-    return m_p2;
-}
-
-std::shared_ptr<point> bendingConstraint::getPoint3() const
-{
-    return m_p3;
+    if(index==0)
+    {
+        m_p1=_p;
+    }
+    else if(index==1)
+    {
+        m_p2=_p;
+    }
+    else if(index==2)
+    {
+        m_p3=_p;
+    }
+    else
+    {
+        std::cout<<"distanceConstraint error, index too big, must be smaller than 3";
+    }
 }
 
 float bendingConstraint::getAngle()
@@ -107,5 +195,9 @@ float bendingConstraint::getAngle()
     return m_angle;
 }
 
+void bendingConstraint::setAngle(float _angle)
+{
+    m_angle=_angle;
+}
 
 }

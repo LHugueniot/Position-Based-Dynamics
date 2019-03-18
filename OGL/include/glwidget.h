@@ -12,6 +12,11 @@
 
 #include <PBDLib>
 
+enum paintType{
+    LINES,
+    TRIANGLES
+};
+
 class GLWidget : public QGLWidget
 {
     Q_OBJECT
@@ -20,10 +25,20 @@ public:
     void initializeGL();
     void paintGL();
     void resizeGL(int w, int h);
+
+    void addPlain();
+    void addCone();
+    bool drawPBDObjects(paintType _type);
+    void drawGrid(uint size);
+
     int time;
     std::vector<float> CamPos;
     std::vector<float> LookAt;
-    float angle=0;
+    float angle=100;
+    float topangle=100;
+    bool simulate=false;
+
+    paintType drawMode=LINES;
 private:
     QTimer timer;
 
@@ -31,7 +46,7 @@ protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
 
-    LuHu::PBDobject m_testObj;
+    LuHu::solver * m_solver;
 };
 
 #endif // GLWIDGET_H

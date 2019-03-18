@@ -6,7 +6,7 @@
 
 QT       += widgets opengl
 
-TARGET = $$(PWD)/build/PBDLib
+TARGET = build/PBDLib
 TEMPLATE = lib
 
 DEFINES += PBDLIB_LIBRARY #MODEL_DIR='$${PWD}'
@@ -28,7 +28,6 @@ INCLUDEPATH+=/home/datlucien/assimp/include include
 
 HEADERS +=  include/kernel.h \
             include/PBDLib \
-            include/pbdlib_global.h \
             include/pbdobject.h \
             include/PBDLib \
             include/point.h \
@@ -42,7 +41,7 @@ SOURCES +=  src/kernel.cpp \
             src/constraint.cpp \
             src/solver.cpp
 
-OBJECTS_DIR+=   $$(PWD)/obj/
+OBJECTS_DIR+= obj/
 
 LIBS+= -lassimp
 

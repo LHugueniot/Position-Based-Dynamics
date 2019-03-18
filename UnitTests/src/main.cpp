@@ -24,10 +24,10 @@ TEST(PBDobject, initialisefalse)
 {
     LuHu::PBDobject TestPBD;
 
-    bool testval=TestPBD.Initialize("model", glm::vec3(0,0,0));
+    bool testval=TestPBD.Initialize("model",0 ,glm::vec3(0,0,0));
 
-    ASSERT_EQ(TestPBD.m_modelName, "model");
-    ASSERT_EQ(TestPBD.m_originalPosition, glm::vec3(0,0,0));
+    ASSERT_EQ(TestPBD.getName(), "model");
+    ASSERT_EQ(TestPBD.getOriginalPos(), glm::vec3(0,0,0));
     ASSERT_EQ(testval, false);
 
 }
@@ -36,7 +36,10 @@ TEST(PBDobject, initialisetrue)
 {
     LuHu::PBDobject TestPBD;
 
-    bool testval=TestPBD.Initialize(modelName,glm::vec3(0,0,0));
+    bool testval=TestPBD.Initialize(modelName,0,glm::vec3(0,0,0));
+
+    ASSERT_EQ(TestPBD.getName(), "model");
+    ASSERT_EQ(TestPBD.getOriginalPos(), glm::vec3(0,0,0));
     ASSERT_EQ(testval, true);
 }
 
@@ -151,8 +154,8 @@ TEST(distanceConstraint, constructor)
     auto p1 = point(glm::vec3(0), glm::vec3(0), 1.0f);
     auto p2 = point(glm::vec3(0), glm::vec3(0), 1.0f);
     auto test = new LuHu::distanceConstraint(p1, p2);
-    ASSERT_TRUE(test->getPoint1());
-    ASSERT_TRUE(test->getPoint2());
+    ASSERT_TRUE(test->getPoint(0));
+    ASSERT_TRUE(test->getPoint(1));
 
 }
 
@@ -162,9 +165,9 @@ TEST(bendingConstraint, constructor)
     auto p2 = point(glm::vec3(0), glm::vec3(0), 1.0f);
     auto p3 = point(glm::vec3(0), glm::vec3(0), 1.0f);
     auto test = new LuHu::bendingConstraint(p1, p2, p3);
-    ASSERT_TRUE(test->getPoint1());
-    ASSERT_TRUE(test->getPoint2());
-    ASSERT_TRUE(test->getPoint3());
+    ASSERT_TRUE(test->getPoint(0));
+    ASSERT_TRUE(test->getPoint(1));
+    ASSERT_TRUE(test->getPoint(2));
 }
 
 TEST(kernel, compare)
@@ -185,18 +188,42 @@ TEST(kernel, compare)
 
 TEST(kernel, getEdge)
 {
-    const aiScene* test=LuHu::getModel(modelName);
-    auto a =LuHu::getEdges(test,0);
+    LuHu::PBDobject TestPBD;
+    TestPBD.Initialize(modelName,0,glm::vec3(0,0,0));
+    auto modelPtr=getModel(modelName);
+
+    auto pointTest=storePoints(modelPtr,0);
+
+    auto a =LuHu::getEdges(modelPtr,0,pointTest);
     ASSERT_EQ(a.size(), 18);
 }
 
 TEST(kernel, createDistanceConstraints)
 {
     const aiScene* test=LuHu::getModel(modelName);
-    auto a =LuHu::getEdges(test,0);
+
+    auto pointTest=storePoints(test,0);
+    auto a =LuHu::getEdges(test,0,pointTest);
     posVector b =storePoints(test,0);
     std::vector<std::shared_ptr<point>> pointsPtr;
     auto c=createDistanceConstraints(a,b,pointsPtr);
 
     ASSERT_EQ(c.size(), 18);
+}
+
+TEST(solver, constructor)
+{
+    solver test(1.0f, glm::vec3(0, -0.98, 0));
+    ASSERT_FLOAT_EQ(test.getDamp(), 1.0f);
+    ASSERT_EQ(test.getGrav(), glm::vec3(0, -0.98, 0));
+
+    //auto TestPBD = new LuHu::PBDobject();
+    LuHu::PBDobject TestPBD;
+
+    TestPBD.Initialize(modelName,0,glm::vec3(0,0,0));
+
+    auto TestPBD1 =std::make_shared<LuHu::PBDobject>(TestPBD);
+
+    test.addPBDobject(TestPBD1);
+
 }

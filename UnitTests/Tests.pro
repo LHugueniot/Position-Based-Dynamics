@@ -1,5 +1,5 @@
 TEMPLATE=app
-LIBS+=-L/usr/local/lib -lgtest -lgtest_main -L$$PWD/../PBDLib/build -lPBDLib
+LIBS+=-L/usr/local/lib -lgtest -lgtest_main -L../PBDLib/build -lPBDLib
 CONFIG+=c++11
 
 DEFINES+= CURRENT_DIR=$$PWD
@@ -10,6 +10,6 @@ OBJECTS_DIR+=obj/
 
 TARGET= build/Tests
 
-INCLUDEPATH+= $$PWD/../PBDLib/include
+INCLUDEPATH+= ../PBDLib/include
 
-QMAKE_RPATHDIR+= $$PWD/../PBDLib
+#QMAKE_RPATHDIR+= $$PWD/../PBDLib

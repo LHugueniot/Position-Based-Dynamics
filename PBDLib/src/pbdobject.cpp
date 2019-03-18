@@ -10,7 +10,7 @@ PBDobject::PBDobject()
 
 }
 
-bool PBDobject::Initialize(std::string _model, glm::vec3 _originalPos)
+bool PBDobject::Initialize(std::string _model,uint _meshIndex, glm::vec3 _originalPos)
 {
     m_modelName=_model;
     m_originalPosition=_originalPos;
@@ -21,12 +21,18 @@ bool PBDobject::Initialize(std::string _model, glm::vec3 _originalPos)
         return false;
     }
 
-    m_facePoints=storePoints(scene,0);
+    auto allpoints = storePoints(scene, _meshIndex);
+    auto edges = getEdges(scene, _meshIndex, allpoints);
+    auto faceIndices=removeDuplicates(allpoints);
 
-    auto edges = getEdges(scene,0);
+    m_Constraints =createDistanceConstraints(edges,faceIndices, m_Points);
+    m_facePoints=getFaces(scene, _meshIndex , m_Points, allpoints);
 
-    m_Constraints =createDistanceConstraints(edges,m_facePoints, m_Points);
-
+    for(auto p : m_Points)
+    {
+        auto pos = p.get()->getP();
+        p.get()->setP(pos+m_originalPosition );
+    }
     return true;
 }
 
@@ -35,4 +41,26 @@ std::vector<std::shared_ptr<constraint>> PBDobject::getConstraints() const
     return m_Constraints;
 }
 
+
+std::vector<std::shared_ptr<point>> PBDobject::getPoints() const
+{
+    return m_Points;
 }
+
+void PBDobject::addPoint(std::shared_ptr<point>  _newP)
+{
+    m_Points.push_back(_newP);
+}
+
+void PBDobject::addConstraint(std::shared_ptr<constraint> _newCon)
+{
+    m_Constraints.push_back(_newCon);
+}
+
+std::vector<std::shared_ptr<point>> PBDobject::getFacesPoints() const
+{
+    return m_facePoints;
+}
+
+} // end of namespace
+

@@ -19,7 +19,9 @@ void GLWidget::initializeGL()
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
-    m_testObj.Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/deCube.obj",glm::vec3(0));
+
+    m_solver= new LuHu::solver(1.0f, glm::vec3(0,-0.1,0));
+    addPlain();
 
 }
 
@@ -31,45 +33,17 @@ void GLWidget::paintGL()
 
     glColor3f(1, 0, 0.5);
 
-//    glBindBuffer(GL_ARRAY_BUFFER, buf1);
-//    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    if(simulate==true && m_solver)
+    {
+        m_solver->RunSolver(5.0f);
 
-//    glPushMatrix();
-//    //auto p=Cloth.OtherObjs[0]->m_pos;
-//    //glTranslated(p.x,p.y,p.z);
-//    //glutSolidSphere(Cloth.OtherObjs[0]->m_radius,20,20);
-//    glPopMatrix();
-
-
+    }
 
     glRotatef(angle,0,1,0);
+    drawPBDObjects(TRIANGLES);
 
-
-    glBegin(GL_LINES);
-
-    for(uint i=0; i<m_testObj.getConstraints().size(); i++)
-    {
-        auto p1 =m_testObj.getConstraints()[i].get()->getPoint(0).get()->getP();
-        auto p2 =m_testObj.getConstraints()[i].get()->getPoint(1).get()->getP();
-        LuHu::printVec3(p1);
-        LuHu::printVec3(p2);
-        std::cout<<"\n";
-
-        glColor3f(1, 0, 0);
-        glVertex3f(p1.x, p1.y, p1.z);
-        glColor3f(0, 1, 0);
-        glVertex3f(p2.x, p2.y, p2.z);
-
-
-        //glm::vec3 p1 = m_testObj.getConstraints()[i].get()->getPoint(0);
-    }
-    std::cout<<"\n\n";
-    glEnd();
-
-        glLoadIdentity();
-    //gluLookAt(CamPos[0],CamPos[1],CamPos[2], LookAt[0], LookAt[1], LookAt[2], 0, 1, 0);
-        angle++;
+    glLoadIdentity();
+    //angle++;
 
 }
 
@@ -103,12 +77,16 @@ void GLWidget::keyPressEvent(QKeyEvent *event)
         LookAt[0]-=1;
         break;
     case Qt::Key_A:
-        CamPos[2]+=1;
-        LookAt[2]+=1;
+        angle-=1.0;
         break;
     case Qt::Key_D:
-        CamPos[2]-=1;
-        LookAt[2]-=1;
+        angle+=1.0;
+        break;
+    case Qt::Key_M:
+        simulate=!simulate;
+        break;
+    case Qt::Key_N:
+        //simulate=true;
         break;
     }
 }
@@ -119,4 +97,122 @@ void GLWidget::keyReleaseEvent(QKeyEvent *event)
     {
         std::cout<<"Esc unpressed";
     }
+}
+
+
+void GLWidget::addPlain()
+{
+    auto m_testObj = std::shared_ptr<LuHu::PBDobject>(new LuHu::PBDobject);
+    auto a=m_testObj->Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/plaine.obj",0,glm::vec3(0,5,0));
+    if(a)
+    {
+        std::cout<<"working!";
+        m_solver->addPBDobject(m_testObj);
+        m_testObj->getPoints()[0]->setIM(0);
+        m_testObj->getPoints()[20]->setIM(0);
+    }
+    else
+    {
+        std::cout<<"its not working";
+    }
+}
+
+void GLWidget::addCone()
+{
+    auto m_testObj = std::shared_ptr<LuHu::PBDobject>(new LuHu::PBDobject);
+    auto a=m_testObj->Initialize("/home/s4906706/Documents/PP/PPproj/LuHuPBDLib/PBDLib/models/cone.obj",0,glm::vec3(0));
+
+    if(a)
+    {
+        auto testobj =m_testObj->getPoints();
+
+        std::shared_ptr<LuHu::point> topPoint;
+        for(auto p : testobj)
+        {
+            if(p.get()->getP().y>0.1)
+            {
+                topPoint=p;
+
+            }
+        }
+        std::shared_ptr<LuHu::point> newp(new LuHu::point(glm::vec3(0,5,0), glm::vec3(0,0,0), 1.0));
+
+        newp->setIM(0);
+        std::shared_ptr<LuHu::distanceConstraint> newCon(new LuHu::distanceConstraint(newp,topPoint));
+
+        newCon->setRestLength(5);
+
+        m_solver->addPBDobject(m_testObj);
+
+        m_testObj->addPoint(newp);
+        m_testObj->addConstraint(newCon);
+    }
+    else
+    {
+        std::cout<<"its not working";
+    }
+}
+
+bool GLWidget::drawPBDObjects(paintType _type)
+{
+    uint totalNumOfObj = m_solver->getObjects().size();
+
+    if(totalNumOfObj!=0)
+    {
+        for(auto o : m_solver->getObjects())
+        {
+            switch (_type) {
+            case LINES:
+            {
+                glBegin(GL_LINES);
+
+
+                for(uint i=0; i<o.get()->getConstraints().size(); i++)
+                {
+                    auto p1 =o.get()->getConstraints()[i].get()->getPoint(0).get()->getP();
+                    auto p2 =o.get()->getConstraints()[i].get()->getPoint(1).get()->getP();
+
+                    glColor3f(1, 0, 0);
+                    glVertex3f(p1.x, p1.y, p1.z);
+                    glColor3f(0, 1, 0);
+                    glVertex3f(p2.x, p2.y, p2.z);
+                }
+
+                glEnd();
+                break;
+            }
+            case TRIANGLES:
+            {
+                glBegin(GL_TRIANGLES);
+
+                for(uint i=0; i<o.get()->getFacesPoints().size(); i+=3)
+                {
+                    auto p1=o.get()->getFacesPoints()[i].get()->getP();
+                    auto p2=o.get()->getFacesPoints()[i+1].get()->getP();
+                    auto p3=o.get()->getFacesPoints()[i+2].get()->getP();
+
+                    glColor3f(1, 0, 0);
+                    glVertex3f(p1.x, p1.y, p1.z);
+                    glColor3f(0, 1, 0);
+                    glVertex3f(p2.x, p2.y, p2.z);
+                    glColor3f(0, 0, 1);
+                    glVertex3f(p3.x, p3.y, p3.z);
+
+                }
+                glEnd();
+                break;
+            }
+            default:
+                break;
+            }
+
+        }
+    }
+}
+
+void GLWidget::drawGrid(uint size)
+{
+    glBegin(GL_LINES);
+
+    glEnd();
 }
