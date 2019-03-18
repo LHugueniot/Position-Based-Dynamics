@@ -28,6 +28,8 @@ To use library in code:
 		m_testObj->getPoints()[0]->setIM(0)
 
 To use demo:
-	in the initialize function it is possible to switch between a cone model and a plain model which have been pre setup
+	In the initialize function it is possible to switch between a cone model and a plain model which have been pre setup.
+	
+Class Hierarchy is based on this UML diagram:
 
-![LuHuPBDUMLDiagram](https://user-images.githubusercontent.com/22621061/54531231-b13f5180-497c-11e9-95e9-2467184c3e19.png)
+	![LuHuPBDUMLDiagram](https://user-images.githubusercontent.com/22621061/54531231-b13f5180-497c-11e9-95e9-2467184c3e19.png)
